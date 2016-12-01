@@ -1,0 +1,42 @@
+version: '2'
+services:
+  server:
+    hostname: server
+    image: server
+    container_name: server
+    build: ./server
+    command: node ./bin/www 0.0.0.0 mongo
+    ports:
+     - "3000:3000"
+    expose:
+     - "3000"
+    depends_on:
+     - mongo
+    networks:
+      - my-network
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    hostname: mongo
+    ports:
+    - "27018:27017"
+    networks:
+      - my-network
+
+  client:
+    hostname: client
+    container_name: client
+    build: ./client
+    command: node ./bin/www 0.0.0.0
+    ports:
+    - "3001:3001"
+    expose:
+    - "3001"
+    depends_on:
+     - server
+    networks:
+      - my-network
+networks:
+    my-network:
+      driver: bridge

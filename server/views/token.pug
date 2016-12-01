@@ -1,0 +1,10 @@
+extends ./layout
+
+block content
+
+  form(action='/token', method='post')
+    button(type='submit') Generate token
+
+  if token
+    p
+      input(type='text' value=`${token}`)

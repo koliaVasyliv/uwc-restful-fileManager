@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1 Welcome to file manager service
+  ul
+    if authenticated
+      li
+        a(href='/token') Get token
+      li
+        a(href='/logout') Logout
+    else
+      li
+        a(href='/login') Login
+      li
+        a(href='/signup') Sign up

@@ -1,0 +1,83 @@
+extends layout
+
+
+block content
+  h1 Client
+
+  p
+    h3 Search file
+    span Type path and file name. Data will be sent like query, you can also mention
+      |  which version to use. Example:
+      b
+        em  ?file1/file2&v=1
+    form#search(action='/search', method='post')
+      input(type='text' name='url', id='url')
+      button(type='submit') Search
+
+
+  p
+    h3 Get file
+    span Type path and file name and in query you can mention or
+      em omit
+      | what version of the file you want to get. Example:
+      b
+        em  /file1/file2?v=1
+    form#get(action='/get', method='post')
+      input#inputGet(type='text', name='url')
+      button(type='submit') Get
+
+  p
+    h3 Post file (create new one)
+    span Type path and file name and in query mention if it is `file` or `dir`.
+      | It will be used test.txt that located in `public/files/` for testing functionality. Example:
+      b
+        em  /file1/file2?type=file
+    form#post(action='/post', method='post')
+      input#inputPost(type='text', name='url')
+      button(type='submit') Post
+
+  p
+    h3 Put data (update file content)
+    span Type path and file name and in query you can mention or
+      em omit
+      | what version of the file you want to get. Example:
+      b
+        em  /file1/file2?v=2
+    form#put(action='/put', method='post')
+      input#inputPut(type='text', name='url')
+      button(type='submit') Put
+
+  p
+    h3 Patch data (rename or move file)
+    span Type path and file name. In query type the new name of the file or
+      | the name of directory where you want to move your files. Example:
+      b
+        em  /file1/file2?name='file3'
+      |  to rename file or
+      br
+      b
+        em  /file1/file2?path=file3/file2
+      |  to move files
+    form#patch(action='/patch', method='post')
+      input#inputPatch(type='text', name='url')
+      button(type='submit') Patch
+
+  p
+    h3 HEAD data (get some meta information)
+    span Type path and file name. In query you can mention which version of file to get.
+      | Example:
+      b
+        em  /file1/file2?v=1
+    form(action='/head', method='post')
+      input(type='text', name='url')
+      button(type='submit') HEAD file
+
+  p
+    h3 Delete file
+    span Type path and file name. In query you can mention which version of file to delete.
+      | Example:
+      b
+        em  /file1/file2
+    form(action='/delete', method='post')
+      input(type='text', name='url')
+      button(type='submit') Delete file
